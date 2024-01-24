@@ -9,6 +9,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: Text('안녕'));
+    return MaterialApp(
+        home: Scaffold(
+          appBar: AppBar( title: Text('앱제목'), foregroundColor: Colors.white, backgroundColor: Colors.blue, ),
+          body: Text('안녕'),
+          bottomNavigationBar: BottomAppBar(
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(Icons.phone),
+                  Icon(Icons.message),
+                  Icon(Icons.contact_page),
+                ]
+            ),
+          ),
+        )
+    );
   }
 }
