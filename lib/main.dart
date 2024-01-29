@@ -11,6 +11,10 @@ void main() {
 * 4. 마무리 디자인
 * */
 
+var a = SizedBox(
+  child: Text('안녕'),
+);
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -19,39 +23,65 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         home: Scaffold(
           appBar: AppBar(
-            title: Text('숙제임'),
+            automaticallyImplyLeading: false,
+            title: const Text('숙제임')
           ),
-          body: Container(
-            height: 150,
-            padding: EdgeInsets.all(10),
-            child: Row(
-              children: [
-                Image.asset('eunbi.jpg', width: 150,),
-                Flexible(
-                  flex: 9,
-                  child: Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('권은비입니다.'),
-                        Text('여름의 여신'),
-                        Text('선넘비'),
-                        Text('대장토끼은비'),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                            Icon(Icons.favorite),
-                            Text('1000000'),
-                          ],
-                        )
-                      ],
-                    ),
-                  )
-                ),
-              ],
-            ),
+          body: ListView(
+            children: [
+              ContactItem(),
+              ContactItem(),
+              ContactItem(),
+            ],
           ),
+          bottomNavigationBar: CostomBottomAppBar(),
         ),
+    );
+  }
+}
+
+class CostomBottomAppBar extends StatelessWidget {
+  const CostomBottomAppBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomAppBar(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget> [
+          Icon(Icons.phone),
+          Icon(Icons.message),
+          Icon(Icons.contact_page),
+        ],
+      ),
+    );
+  }
+}
+
+
+class ContactItem extends StatelessWidget {
+  const ContactItem({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Icon(Icons.account_circle),
+        Text('홍길동'),
+      ],
+    );
+  }
+}
+
+
+class ShopItem extends StatelessWidget {
+  const ShopItem({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      child: Text('안녕'),
     );
   }
 }
