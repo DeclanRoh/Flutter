@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 /* 레이아웃 혼자서도 잘짜는 법
@@ -16,22 +16,29 @@ var a = SizedBox(
 );
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  var a = 1;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
+          floatingActionButton: FloatingActionButton(
+            child: Text(a.toString()),
+            onPressed: (){
+              a++;
+            },
+          ),
           appBar: AppBar(
             automaticallyImplyLeading: false,
             title: const Text('숙제임')
           ),
-          body: ListView(
-            children: [
-              ContactItem(),
-              ContactItem(),
-              ContactItem(),
-            ],
+          body: ListView.builder(
+            itemCount: 3,
+            itemBuilder: (c, i){
+              return ContactItem();
+            },
           ),
           bottomNavigationBar: CustomBottomAppBar(),
         ),
@@ -58,30 +65,14 @@ class CustomBottomAppBar extends StatelessWidget {
   }
 }
 
-
 class ContactItem extends StatelessWidget {
   const ContactItem({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Icon(Icons.account_circle),
-        Text('홍길동'),
-      ],
-    );
-  }
-}
-
-
-class ShopItem extends StatelessWidget {
-  const ShopItem({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      child: Text('안녕'),
+    return ListTile(
+            leading: Icon(Icons.account_circle),
+            title: Text('홍길동')
     );
   }
 }
