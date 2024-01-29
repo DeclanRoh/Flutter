@@ -33,14 +33,14 @@ class MyApp extends StatelessWidget {
               ContactItem(),
             ],
           ),
-          bottomNavigationBar: CostomBottomAppBar(),
+          bottomNavigationBar: CustomBottomAppBar(),
         ),
     );
   }
 }
 
-class CostomBottomAppBar extends StatelessWidget {
-  const CostomBottomAppBar({super.key});
+class CustomBottomAppBar extends StatelessWidget {
+  const CustomBottomAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
