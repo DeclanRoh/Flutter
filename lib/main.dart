@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MaterialApp(
+      home: MyApp()
+    )
+  );
 }
 
 /* 레이아웃 혼자서도 잘짜는 법
@@ -38,48 +41,56 @@ class _MyAppState extends State<MyApp> {
   // state는 값이 변하면 재랜더링이 된다.
   // state의 경우, 자주 변경할 것만 선언해서 사용한다. 변동되지 않으면 굳이 state에 담을 필요 없다
   @override
-  Widget build(BuildContext context) {
-
-    return MaterialApp(
-        home: Scaffold(
-          floatingActionButton: FloatingActionButton(
-            child: Text('테스트'),
-            onPressed: (){
-              setState(() {
-                'test';
-              });
-            },
+  build(context) {
+    return Scaffold(
+          floatingActionButton: Builder(
+            builder: (context) {
+              return FloatingActionButton(
+                onPressed: (){
+                  //context: Scaffold()의 부모 Widget(Material App)
+                  print(context.findAncestorWidgetOfExactType<MaterialApp>());
+                  showDialog(context: context,
+                      barrierDismissible: false,
+                      builder: (context){
+                    return AlertDialog(
+                      actions: [
+                        TextField(),
+                        ElevatedButton(
+                            onPressed: (){
+                              Navigator.of(context).pop();
+                            },
+                            child: Text('취소'),
+                        ),
+                        ElevatedButton(
+                            onPressed: (){
+                              Navigator.of(context).pop();
+                            },
+                            child: Text('완료'),
+                        ),
+                      ],
+                    );
+                  });
+                },
+              );
+            }
           ),
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            title: Text('공부중'),
-          ),
+          appBar: AppBar(),
           body: ListView.builder(
             itemCount: 3,
             itemBuilder: (c, i){
               return ListTile(
-                leading: Text(like[i].toString()),
+                leading: Icon(Icons.account_circle),
                 title: Text(name[i]),
-                trailing: ElevatedButton(
-                  child: Text('좋아요'),
-                  onPressed: (){
-                    setState(() {
-                      like[i] += 1;
-                    });
-                  },
-                ),
               );
             },
           ),
           bottomNavigationBar: CustomBottomAppBar(),
-        ),
     );
   }
 }
 
 class CustomBottomAppBar extends StatelessWidget {
   const CustomBottomAppBar({super.key});
-
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
@@ -92,18 +103,6 @@ class CustomBottomAppBar extends StatelessWidget {
           Icon(Icons.contact_page),
         ],
       ),
-    );
-  }
-}
-
-class ContactItem extends StatelessWidget {
-  const ContactItem({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-            leading: Icon(Icons.account_circle),
-            title: Text('홍길동')
     );
   }
 }
