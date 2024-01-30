@@ -60,7 +60,7 @@ class _MyAppState extends State<MyApp> {
               return ListTile(
                 leading: Text(like[i].toString()),
                 title: Text(name[i]),
-                trailing: FloatingActionButton(
+                trailing: ElevatedButton(
                   child: Text('좋아요'),
                   onPressed: (){
                     setState(() {
